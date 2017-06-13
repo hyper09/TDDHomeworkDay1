@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/packages
+/TDDHomeworkDay1/obj/Debug
+/TDDHomeworkDay1/bin/Debug
+/TDDHomeworkDay1Tests/obj/Debug
+/TDDHomeworkDay1Tests/bin/Debug
