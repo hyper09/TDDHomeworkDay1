@@ -9,7 +9,7 @@ namespace TDDHomeworkDay1
 {
     public class CalculateSum
     {
-        private List<Entity> Entities;
+        private IEnumerable<object> Entities;
         private string Column;
         private int GroupSize;
 
@@ -17,14 +17,14 @@ namespace TDDHomeworkDay1
         {
         }
 
-        public CalculateSum(List<Entity> entities, string column, int groupSize)
+        public CalculateSum(IEnumerable<object> entities, string column, int groupSize)
         {
             this.Entities = entities;
 
-            Type t = typeof(Entity);
+            var t = this.Entities.GetType().GetGenericArguments().FirstOrDefault();
             var properties = t.GetProperties().Select(x => x.Name);
 
-            if (properties.Contains(column))
+            if (t != null && properties.Contains(column))
             {
                 this.Column = column;
             }
@@ -47,7 +47,7 @@ namespace TDDHomeworkDay1
         {
             List<int> result = new List<int>();
 
-            for (int i = 0; i * GroupSize < this.Entities.Count; i++)
+            for (int i = 0; i * GroupSize < this.Entities.Count(); i++)
             {
                 var sum = this.Entities.Skip(i * GroupSize).Take(GroupSize).Sum(x => Convert.ToInt32(GetPropValue(x, Column)));
                 result.Add(sum);
